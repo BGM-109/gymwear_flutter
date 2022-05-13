@@ -29,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               )
             : ListView(
-                children: vm.gymwears.map((obj) => Text(obj.name)).toList(),
+                children: vm.gymwears.map((obj) => Text(obj.logo.url.toString())).toList(),
               ));
   }
 }

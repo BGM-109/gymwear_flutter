@@ -6,9 +6,10 @@ part 'gymwear_model.g.dart';
 class GymwearModel {
   final String name;
   final String shopLink;
+  final LogoModel logo;
 
 
-  GymwearModel(this.name, this.shopLink);
+  GymwearModel(this.name, this.shopLink, this.logo);
 
   factory GymwearModel.fromJson(Map<String, dynamic> json) =>
       _$GymwearModelFromJson(json);
@@ -21,4 +22,9 @@ class LogoModel {
   final String url;
 
   LogoModel(this.url);
+
+  factory LogoModel.fromJson(Map<String, dynamic> json) =>
+      _$LogoModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LogoModelToJson(this);
 }
