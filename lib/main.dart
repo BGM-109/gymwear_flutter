@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => HomeViewModel())],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomeView(),
       ),
