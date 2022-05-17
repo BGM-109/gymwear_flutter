@@ -97,7 +97,18 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                   const SizedBox(
                     height: 16.0,
                   ),
-                  ...vm.gymwears.map((obj) => CustomCard(gm: obj)).toList()
+                  ...vm.gymwears.map((obj) => CustomCard(gm: obj)).toList(),
+                  const Divider(
+                    height: 5,
+                  ),
+                  const SizedBox(
+                    height: 100,
+                    child: Center(
+                        child: Text(
+                      "Created with 💖 by @BGM-109",
+                      style: TextStyle(color: Colors.grey),
+                    )),
+                  )
                 ],
               ));
   }
