@@ -28,6 +28,7 @@ class CustomCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
+              backgroundColor: Colors.transparent,
               backgroundImage: NetworkImage(gm.logo.url),
             ),
             const SizedBox(

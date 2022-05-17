@@ -31,8 +31,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           }
         });
       });
-    final viewModel = Provider.of<HomeViewModel>(context, listen: false);
-    viewModel.getGymwears();
     super.initState();
   }
 

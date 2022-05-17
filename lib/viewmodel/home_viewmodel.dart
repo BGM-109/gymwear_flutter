@@ -3,6 +3,7 @@ import 'package:gymwear_app/core/network_service.dart';
 import 'package:gymwear_app/model/gymwear_model.dart';
 
 class HomeViewModel extends ChangeNotifier {
+
   List<GymwearModel> _gymwears = [];
 
   List get gymwears => _gymwears;
@@ -15,5 +16,8 @@ class HomeViewModel extends ChangeNotifier {
 
     isLoad = false;
     notifyListeners();
+  }
+  HomeViewModel() {
+    getGymwears();
   }
 }
