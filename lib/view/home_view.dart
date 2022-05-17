@@ -5,6 +5,8 @@ import 'package:gymwear_app/view/widgets/banner.dart';
 import 'package:gymwear_app/view/widgets/card.dart';
 import 'package:gymwear_app/viewmodel/home_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:gymwear_app/assets/constants.dart' as Constants;
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -63,7 +65,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           elevation: 0,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                launchUrl(Uri.parse(Constants.GITREPO_LINK));
+              },
               icon: const FaIcon(
                 FontAwesomeIcons.github,
                 color: Colors.black,
@@ -101,13 +105,28 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                   const Divider(
                     height: 5,
                   ),
-                  const SizedBox(
-                    height: 100,
-                    child: Center(
-                        child: Text(
-                      "Created with 💖 by @BGM-109",
-                      style: TextStyle(color: Colors.grey),
-                    )),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 32.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Created with 💖 by ",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            launchUrl(Uri.parse(Constants.GITHUB_LINK));
+                          },
+                          child: const Text(
+                            "@BGM-109",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ));
