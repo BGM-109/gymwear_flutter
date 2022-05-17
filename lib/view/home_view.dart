@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gymwear_app/core/scroll_service.dart';
 import 'package:gymwear_app/view/widgets/banner.dart';
 import 'package:gymwear_app/view/widgets/card.dart';
 import 'package:gymwear_app/viewmodel/home_viewmodel.dart';
@@ -12,18 +13,47 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
+  bool _showBackToTopButton = false;
+  late ScrollController _scrollController;
+
   @override
   void initState() {
-    super.initState();
+    _scrollController = ScrollController()
+      ..addListener(() {
+        setState(() {
+          if (_scrollController.offset >= 100) {
+            _showBackToTopButton = true; // show the back-to-top button
+          } else {
+            _showBackToTopButton = false; // hide the back-to-top button
+          }
+        });
+      });
     final viewModel = Provider.of<HomeViewModel>(context, listen: false);
     viewModel.getGymwears();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // dispose the controller
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<HomeViewModel>(context);
     return Scaffold(
+        floatingActionButton: _showBackToTopButton == false
+            ? null
+            : FloatingActionButton(
+                onPressed: () => {ScrollService.scrollToTop(_scrollController)},
+                backgroundColor: Colors.white,
+                child: const Icon(
+                  Icons.arrow_upward,
+                  color: Colors.black,
+                ),
+              ),
         appBar: AppBar(
           title: const Text(
             "Gymwear Finder 🚀",
@@ -54,6 +84,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               )
             : ListView(
+                controller: _scrollController,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24.0, vertical: 0),
                 children: [
